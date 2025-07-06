@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conversor MXN a ARS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+    .contenedor {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      border: 1px solid #ccc;
+      border-radius: 0.5rem;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem;
+      width: 100%;
+      background-color: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
+    .resultado {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="contenedor">
+    <h2>Conversor MXN a ARS</h2>
+    <label for="mxn">Cantidad en MXN:</label>
+    <input type="number" id="mxn" placeholder="Ej. 1000">
+
+    <!-- Campo oculto con tasa fija -->
+    <input type="hidden" id="tasa" value="18.63">
+
+    <button onclick="convertir()">Convertir</button>
+
+    <div id="resultado" class="resultado"></div>
+  </div>
+
+  <script>
+    function convertir() {
+      const mxn = parseFloat(document.getElementById('mxn').value);
+      const tasa = parseFloat(document.getElementById('tasa').value);
+      const tasaUsdArs = 1240;
+
+      if (isNaN(mxn) || tasa === 0) {
+        document.getElementById('resultado').innerText = "Entrada inválida. Asegúrate de ingresar un número válido.";
+        return;
+      }
+
+      const usd = mxn / tasa;
+      const ars = usd * tasaUsdArs;
+      document.getElementById('resultado').innerText = `${mxn} MXN equivalen a ${ars.toFixed(2)} ARS`;
+    }
+  </script>
+</body>
+</html>
